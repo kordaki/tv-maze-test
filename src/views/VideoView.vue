@@ -1,25 +1,19 @@
 <script setup lang="ts">
 import { ref, reactive, watch } from "vue";
 import { useRoute } from "vue-router";
-import VideoDataService from "@/services/VideoDataService";
-import type { VideoResponse, Video } from "@/types/Video";
+import { getVideoRequest } from "@/services/VideoDataService";
+import type { Video } from "@/types/Video";
 
 const route = useRoute();
-const { id } = route.params;
-let video = reactive<Video>({});
-const videoId: Number = ref<Number>(id);
 
-const getVideo = (id: Number) => {
-  VideoDataService.get(id)
-    .then((response: VideoResponse) => {
-      video = response.data;
-    })
-    .catch((e: Error) => {
-      console.log(e);
-    });
+let video: Video = reactive<Video>({});
+const videoId: Number = ref<Number>(0);
+
+const getVideo = async (id: Number) => {
+  const [error, videoData] = await getVideoRequest(id);
+  if (error) console.warn(error);
+  else video = videoData;
 };
-
-const showId = () => console.log(id);
 
 watch(
   () => route.params.id,
@@ -38,5 +32,4 @@ watch(
     <img :src="video.image.medium" v-if="video.image" />
     The video id is <b>{{ video.name }}</b>
   </h1>
-  <button @click="showId">Hello</button>
 </template>

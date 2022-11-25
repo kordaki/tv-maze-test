@@ -9,3 +9,8 @@ const apiClient: AxiosInstance = axios.create({
 });
 
 export default apiClient;
+
+apiClient.interceptors.request.use((response) => {
+  console.log("-- $$$ --- ", response);
+  return response;
+});

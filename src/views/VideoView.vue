@@ -2,7 +2,7 @@
 import { ref, reactive, watch } from "vue";
 import { useRoute } from "vue-router";
 import { getVideoRequest } from "@/services/VideoDataService";
-import type { Video } from "@/types/Video";
+import type { Video } from "@/types/VideoType";
 
 const route = useRoute();
 

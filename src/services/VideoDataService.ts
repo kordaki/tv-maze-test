@@ -1,17 +1,15 @@
 import http from "@/configs/http";
-import type { Video, VideoResponse } from "@/types/Video";
+import type { VideoListResponse, Schedule } from "@/types/VideoListType";
+import type { Video, VideoResponse } from "@/types/VideoType";
 
-export default class VideoDataService {
-  getAll(): Promise<any> {
-    return http.get("/search/shows");
-  }
-
-  // get(id: Number): Promise<any> {
-  //   return http.get(`/shows/${id}`);
-  // }
-
-  findByTitle(title: string): Promise<any> {
-    return http.get(`/search/shows?q=${title}`);
+export async function getVideoScheduleRequest() {
+  try {
+    const response: VideoListResponse = await http.get(`/schedule/full`);
+    console.log("-------", response);
+    const schedules: Array<Schedule> = response.data;
+    return [null, schedules];
+  } catch (err) {
+    return [err];
   }
 }
 

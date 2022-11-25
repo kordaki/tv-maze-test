@@ -1,9 +1,21 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import { ref, onMounted } from "vue";
+import { getVideoScheduleRequest } from "@/services/VideoDataService";
+import IconLoading from "../components/icons/IconLoading.vue";
+import VideoItem from "../components/VideoItem.vue";
+
+const isLoading = ref(false);
+
+onMounted(async () => {
+  isLoading.value = true;
+  const response = await getVideoScheduleRequest();
+  isLoading.value = false;
+});
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <IconLoading v-if="isLoading" />
+    <VideoItem />
   </main>
 </template>

@@ -1,31 +1,23 @@
 <script setup lang="ts">
-import { ref, reactive, onMounted } from "vue";
-import { getVideoScheduleRequest } from "@/services/api/VideoDataService";
-import { videoGenresListMaker } from "@/services/VideoGenresList";
+import { onMounted } from "vue";
 import IconLoading from "../components/icons/IconLoading.vue";
 import VideoList from "../components/VideoList.vue";
 import VideoItem from "../components/VideoItem.vue";
+import { useVideosStore } from "@/stores/videos";
 
-const isLoading = ref(false);
-const videoListByGenres = ref();
+const videosStore = useVideosStore();
 
 onMounted(async () => {
-  isLoading.value = true;
-  const [error, response] = await getVideoScheduleRequest();
-  if (!error) {
-    const videoListGroupedByGenre = videoGenresListMaker(response);
-    videoListByGenres.value = videoListGroupedByGenre;
-  }
-  isLoading.value = false;
+  videosStore.getVideoList();
 });
 </script>
 
 <template>
   <main>
-    <IconLoading v-if="isLoading" />
-    <section v-if="videoListByGenres">
+    <IconLoading v-if="videosStore.videos.isLoading" />
+    <section v-if="videosStore.videoListByGenres">
       <VideoList
-        v-for="genre in Object.keys(videoListByGenres)"
+        v-for="genre in Object.keys(videosStore.videoListByGenres)"
         :genre="genre"
         v-bind:key="genre"
       />

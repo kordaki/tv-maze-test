@@ -20,7 +20,7 @@ export const useVideosStore = defineStore("videos", () => {
   };
 
   // getters
-  const videoListByGenres = computed(() => {
+  const videoListGroupedByGenre = computed(() => {
     if (videos.error) return {};
     const videoListGroupedByGenre = { unknown: [] };
     Object.values(videos.list).forEach((video: any) => {
@@ -28,7 +28,7 @@ export const useVideosStore = defineStore("videos", () => {
         videoListGroupedByGenre["unknown"].push(video.id);
         return;
       }
-      video.genres.forEach((genre) => {
+      video.genres.forEach((genre: string) => {
         if (videoListGroupedByGenre[genre]) {
           videoListGroupedByGenre[genre].push(video.id);
         } else {
@@ -39,5 +39,20 @@ export const useVideosStore = defineStore("videos", () => {
     return videoListGroupedByGenre;
   });
 
-  return { videos, getVideoList, videoListByGenres };
+  const genresList = computed(() => Object.keys(videoListGroupedByGenre.value));
+
+  // methods
+  const videoListByGenre = (genreName: string) => {
+    const videoListId = videoListGroupedByGenre.value[genreName];
+    console.log("--- ((( ,", genreName, videoListId);
+    return videoListId.map((videoId: number) => videos.list[videoId]);
+  };
+
+  return {
+    videos,
+    getVideoList,
+    genresList,
+    videoListGroupedByGenre,
+    videoListByGenre,
+  };
 });

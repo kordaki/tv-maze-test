@@ -15,9 +15,9 @@ onMounted(async () => {
 <template>
   <main>
     <IconLoading v-if="videosStore.videos.isLoading" />
-    <section v-if="videosStore.videoListByGenres">
+    <section v-if="videosStore.genresList.length > 0">
       <VideoList
-        v-for="genre in Object.keys(videosStore.videoListByGenres)"
+        v-for="genre in videosStore.genresList"
         :genre="genre"
         v-bind:key="genre"
       />

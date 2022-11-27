@@ -22,6 +22,5 @@ onMounted(async () => {
         v-bind:key="genre"
       />
     </section>
-    <VideoItem />
   </main>
 </template>

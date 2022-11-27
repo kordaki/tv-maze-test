@@ -1,4 +1,4 @@
-import { reactive, computed } from "vue";
+import { reactive, computed, toRaw } from "vue";
 import { defineStore } from "pinia";
 import { getVideoScheduleRequest } from "@/services/api/VideoDataService";
 
@@ -44,8 +44,11 @@ export const useVideosStore = defineStore("videos", () => {
   // methods
   const videoListByGenre = (genreName: string) => {
     const videoListId = videoListGroupedByGenre.value[genreName];
-    console.log("--- ((( ,", genreName, videoListId);
-    return videoListId.map((videoId: number) => videos.list[videoId]);
+    const res = videoListId.map((videoId: number) =>
+      toRaw(videos.list[videoId])
+    );
+    console.log("--- res:", res);
+    return res;
   };
 
   return {

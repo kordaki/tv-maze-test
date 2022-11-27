@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import VideoItem from "./VideoItem.vue";
 import { useVideosStore } from "@/stores/videos";
-
 defineProps<{
   genre: string;
 }>();
@@ -10,10 +10,15 @@ const videosStore = useVideosStore();
 
 <template>
   <h1>{{ genre }}</h1>
-  <span
+  <VideoItem
     v-for="video in videosStore.videoListByGenre(genre)"
     v-bind:key="video.id"
-    >{{ video.name }} -</span
-  >
-  <p>List of videos will come here</p>
+    :image="video.image?.medium"
+    :title="video.name"
+    :summary="video.summary"
+    :averageRating="video.rating.average"
+    :language="video.language"
+    :type="video.type"
+    :genres="video.genres"
+  />
 </template>

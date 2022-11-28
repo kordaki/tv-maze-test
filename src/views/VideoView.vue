@@ -1,35 +1,27 @@
 <script setup lang="ts">
-import { ref, reactive, watch } from "vue";
+import { onMounted } from "vue";
 import { useRoute } from "vue-router";
-import { getVideoRequest } from "@/services/api/VideoDataService";
-import type { Video } from "@/types/VideoType";
+import { useVideoStore } from "@/stores/video";
+import IconLoading from "@/components/icons/IconLoading.vue";
 
 const route = useRoute();
+const videoStore = useVideoStore();
 
-let video: Video = reactive<Video>({});
-const videoId: Number = ref<Number>(0);
-
-const getVideo = async (id: Number) => {
-  const [error, videoData] = await getVideoRequest(id);
-  if (error) console.warn(error);
-  else video = videoData;
-};
-
-watch(
-  () => route.params.id,
-  async (newId: Number) => {
-    videoId.value = newId;
-    getVideo(newId);
-  },
-  {
-    immediate: true,
-  }
-);
+onMounted(() => {
+  videoStore.getVideo(Number(route.params.id));
+  console.log();
+});
 </script>
 
 <template>
-  <h1>
-    <img :src="video.image.medium" v-if="video.image" />
-    The video id is <b>{{ video.name }}</b>
-  </h1>
+  <IconLoading v-if="videoStore.video.isLoading" />
+  <section v-else>
+    <img
+      v-if="videoStore.video.data?.image"
+      :src="videoStore.video.data?.image?.medium"
+    />
+    <h1>
+      The video id is <b>{{ videoStore.video.data?.name }}</b>
+    </h1>
+  </section>
 </template>

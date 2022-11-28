@@ -26,7 +26,11 @@ const navigateToVideoPage = () => {
 <template>
   <article class="video" @click="navigateToVideoPage">
     <div class="hero">
-      <img :src="image" alt="video" title="video" />
+      <img
+        :src="image || 'https://via.placeholder.com/210x295.png?text=image+not+found'"
+        alt="video"
+        title="video"
+      />
       <div class="description" v-html="summary"></div>
     </div>
     <h3>{{ title }}</h3>
@@ -63,6 +67,7 @@ const navigateToVideoPage = () => {
   height: var(--video-height);
   width: var(--video-width);
   object-fit: cover;
+  background-image: url('https://via.placeholder.com/210x295.png?text=Loading');
 }
 
 .video .hero .description {

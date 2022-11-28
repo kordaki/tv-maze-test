@@ -13,6 +13,7 @@ const videosStore = useVideosStore();
   <VideoItem
     v-for="video in videosStore.videoListByGenre(genre)"
     v-bind:key="video.id"
+    :id="video.id"
     :image="video.image?.medium"
     :title="video.name"
     :summary="video.summary"

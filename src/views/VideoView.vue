@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, reactive, watch } from "vue";
 import { useRoute } from "vue-router";
-import { getVideoRequest } from "@/services/api/VideoDataServicevice";
+import { getVideoRequest } from "@/services/api/VideoDataService";
 import type { Video } from "@/types/VideoType";
 
 const route = useRoute();

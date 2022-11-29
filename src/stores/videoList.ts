@@ -11,6 +11,7 @@ export const useVideoListStore = defineStore("videoList", () => {
 
   // actions
   const getVideoList = async () => {
+    if (videos.isLoading) return;
     videos.isLoading = true;
     videos.error = null;
     const [error, response] = await getVideoScheduleRequest();
@@ -42,11 +43,21 @@ export const useVideoListStore = defineStore("videoList", () => {
   const genresList = computed(() => Object.keys(videoListGroupedByGenre.value));
 
   // methods
-  const videoListByGenre = (genreName: string) => {
+  const sortVideoByRating = (videoList) => {
+    return videoList.sort((a, b) => {
+      if (a.rating.average > b.rating.average) {
+        return -1;
+      }
+      if (a.rating.average < b.rating.average) {
+        return 1;
+      }
+      return 0;
+    });
+  };
+  const videoListByGenre = (genreName: string, isSortEnable: boolean) => {
     const videoListId = videoListGroupedByGenre.value[genreName];
-    const res = videoListId.map((videoId: number) =>
-      toRaw(videos.list[videoId])
-    );
+    let res = videoListId.map((videoId: number) => toRaw(videos.list[videoId]));
+    if (isSortEnable) res = sortVideoByRating(res);
     return res;
   };
 

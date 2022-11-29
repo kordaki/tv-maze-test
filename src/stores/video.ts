@@ -11,6 +11,7 @@ export const useVideoStore = defineStore("video", () => {
 
   // actions
   const getVideo = async (id: number) => {
+    if (video.isLoading) return;
     video.isLoading = true;
     video.error = null;
     const [error, response] = await getVideoRequest(id);

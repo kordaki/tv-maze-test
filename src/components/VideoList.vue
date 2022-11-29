@@ -1,21 +1,40 @@
 <script setup lang="ts">
+import { useRoute } from "vue-router";
 // stores
 import { useVideoListStore } from "@/stores/videoList";
 //components
 import VideoItem from "./VideoItem.vue";
 
+const route = useRoute();
 defineProps<{
   genre: string;
 }>();
 
 const videoListStore = useVideoListStore();
+
+// watch(
+//   () => route.query.isSortEnable,
+//   async (newQuery: string) => {
+//     videoList.value = videoListStore.videoListByGenre(
+//       genre,
+//       Boolean(route.query.isSortEnable)
+//     );
+//     searchedListStore.searchVideoRequest(newQuery);
+//   },
+//   {
+//     immediate: true,
+//   }
+// );
 </script>
 
 <template>
   <h2 class="genre-title">{{ genre }}</h2>
   <section class="video-list">
     <VideoItem
-      v-for="video in videoListStore.videoListByGenre(genre)"
+      v-for="video in videoListStore.videoListByGenre(
+        genre,
+        route.query.isSortEnable === 'true'
+      )"
       v-bind:key="video.id"
       :id="video.id"
       :image="video.image?.medium"

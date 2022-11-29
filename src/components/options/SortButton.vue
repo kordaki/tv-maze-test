@@ -12,7 +12,7 @@ const switchSortByRating = (e: Event) => {
   isSortEnabled.value = !isSortEnabled.value;
   router.push({
     name: "home",
-    query: { ...route.query, isSortEnabled: isSortEnabled.value.toString() },
+    query: { ...route.query, isSortEnable: isSortEnabled.value.toString() },
   });
 };
 </script>
@@ -26,7 +26,7 @@ const switchSortByRating = (e: Event) => {
       :checked="isSortEnabled"
     />
     <label for="sort-by-rating" @click="switchSortByRating">
-      Sort by rates</label
+      Sort by Rating</label
     ><br />
   </section>
 </template>

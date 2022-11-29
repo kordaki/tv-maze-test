@@ -11,6 +11,7 @@ export const useSearchedListStore = defineStore("searchedList", () => {
 
   // actions
   const searchVideoRequest = async (query: string) => {
+    if (videos.isLoading) return;
     videos.isLoading = true;
     videos.error = null;
     const [error, response] = await searchVideosRequest(query);

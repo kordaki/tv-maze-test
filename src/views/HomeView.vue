@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 import isEmpty from "lodash/isEmpty";
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
+// stores
+import { useVideoListStore } from "@/stores/videoList";
+// components
 import IconLoading from "@/components/icons/IconLoading.vue";
 import VideoList from "@/components/VideoList.vue";
-import { useVideoListStore } from "@/stores/videoList";
 import SearchInput from "@/components/options/SearchInput.vue";
 import SortButton from "@/components/options/SortButton.vue";
 import SearchResult from "@/components/SearchResult.vue";
 
 const videoListStore = useVideoListStore();
-const router = useRouter();
 const route = useRoute();
 
 onMounted(async () => {

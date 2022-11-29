@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { useSearchedListStore } from "@/stores/searchedList";
 import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
+
 const router = useRouter();
 const route = useRoute();
-const searchedListStore = useSearchedListStore();
 const userSearchQuery = ref("");
 
 const searchHandler = (e: Event) => {
@@ -13,7 +12,6 @@ const searchHandler = (e: Event) => {
     name: "home",
     query: { ...route.query, q: userSearchQuery.value },
   });
-  searchedListStore.searchVideoList(userSearchQuery.value);
 };
 </script>
 

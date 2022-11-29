@@ -1,5 +1,5 @@
 export const videoListTransformer = (data: any) => {
-  return data.reduce((obj, dataItem) => {
+  return data.reduce((obj: any, dataItem: any) => {
     const id = dataItem._embedded.show.id;
     obj[id] = {
       id: dataItem._embedded.show.id,

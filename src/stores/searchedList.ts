@@ -10,19 +10,17 @@ export const useSearchedListStore = defineStore("searchedList", () => {
   });
 
   // actions
-  const searchVideoList = async (query: string) => {
+  const searchVideoRequest = async (query: string) => {
     videos.isLoading = true;
     videos.error = null;
     const [error, response] = await searchVideosRequest(query);
     videos.error = error;
     videos.isLoading = false;
     videos.list = response;
-    console.log(" searchVideoList resp", response);
-    console.log(" searchVideoList ", videos.list);
   };
 
   return {
     videos,
-    searchVideoList,
+    searchVideoRequest,
   };
 });

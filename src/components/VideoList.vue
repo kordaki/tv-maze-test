@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import VideoItem from "./VideoItem.vue";
+// stores
 import { useVideoListStore } from "@/stores/videoList";
+//components
+import VideoItem from "./VideoItem.vue";
+
 defineProps<{
   genre: string;
 }>();

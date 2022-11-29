@@ -4,12 +4,12 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const props = defineProps<{
   id: number;
-  image: string;
+  image?: string;
   title: string;
-  summary: string;
-  averageRating: number;
+  summary?: string;
+  averageRating?: number;
   genres: Array<string>;
-  language: string;
+  language?: string;
   type: string;
 }>();
 

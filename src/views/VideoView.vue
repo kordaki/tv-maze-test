@@ -2,7 +2,9 @@
 import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 import isEmpty from "lodash/isEmpty";
+// stores
 import { useVideoStore } from "@/stores/video";
+// components
 import IconLoading from "@/components/icons/IconLoading.vue";
 import NotFound from "@/components/common/NotFound.vue";
 import ErrorContent from "@/components/common/ErrorContent.vue";

@@ -1,5 +1,5 @@
 export const searchVideosTransformer = (data: any) => {
-  return data.map((result) => ({
+  return data.map((result: any) => ({
     id: result.show.id,
     name: result.show.name,
     genres: result.show.genres,

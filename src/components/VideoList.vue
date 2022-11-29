@@ -27,7 +27,7 @@ const videoListStore = useVideoListStore();
 </template>
 
 <style>
-.genre-title{
+.genre-title {
   border-bottom: 1px solid var(--color-border);
   padding-bottom: 0.5rem;
 }

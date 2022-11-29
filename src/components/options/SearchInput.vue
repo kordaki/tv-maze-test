@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import { useOptionsStore } from "@/stores/options";
 import { ref } from "vue";
-const optionsStore = useOptionsStore();
-
-const userSearchText = ref(optionsStore.searchText);
+import { useRoute, useRouter } from "vue-router";
+const router = useRouter();
+const route = useRoute();
+const userSearchQuery = ref("");
 
 const searchHandler = (e: Event) => {
   e.preventDefault();
-  optionsStore.updateSearchText(userSearchText.value);
+  router.push({
+    name: "home",
+    query: { ...route.query, q: userSearchQuery.value },
+  });
 };
 </script>
 
@@ -18,7 +21,7 @@ const searchHandler = (e: Event) => {
         type="search"
         name="search"
         placeholder="search here..."
-        v-model="userSearchText"
+        v-model="userSearchQuery"
       />
       <input type="submit" name="Search" />
     </form>

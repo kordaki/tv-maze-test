@@ -1,6 +1,19 @@
 <script setup lang="ts">
-import { useOptionsStore } from "@/stores/options";
-const optionsStore = useOptionsStore();
+import { ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
+const router = useRouter();
+const route = useRoute();
+console.log(route)
+const isSortEnabled = ref(Boolean(route.query.sortByRaring));
+
+const switchSortByRating = (e: Event) => {
+  e.preventDefault();
+  isSortEnabled.value = !isSortEnabled.value;
+  router.push({
+    name: "home",
+    query: { ...route.query, isSortEnabled: isSortEnabled.value.toString() },
+  });
+};
 </script>
 
 <template>
@@ -9,8 +22,11 @@ const optionsStore = useOptionsStore();
       type="checkbox"
       id="sort-by-rating"
       value="sort-by-rating"
-      v-model="optionsStore.isSortByRating"
+      :checked="isSortEnabled"
     />
-    <label for="sort-by-rating"> Sort by rates</label><br />
+    <label for="sort-by-rating" @click="switchSortByRating">
+      Sort by rates</label
+    ><br />
   </section>
 </template>
+

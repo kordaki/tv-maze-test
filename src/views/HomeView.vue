@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 import IconLoading from "../components/icons/IconLoading.vue";
-import VideoList from "../components/VideoList.vue";
+import VideoList from "../components/videoList/VideoList.vue";
 import { useVideosStore } from "@/stores/videos";
-import SearchInput from "@/components/SearchInput.vue";
-import SortButton from "@/components/SortButton.vue";
+import SearchInput from "@/components/videoList/SearchInput.vue";
+import SortButton from "@/components/videoList/SortButton.vue";
 
 const videosStore = useVideosStore();
 

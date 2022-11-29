@@ -1,4 +1,4 @@
-export const VideoTransformer = (data: any) => {
+export const videoTransformer = (data: any) => {
   return data;
   // return {
   //   id: data._embedded.show.id,

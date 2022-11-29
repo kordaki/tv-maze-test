@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 const router = useRouter();
 const route = useRoute();
-console.log(route)
+
 const isSortEnabled = ref(Boolean(route.query.sortByRaring));
 
 const switchSortByRating = (e: Event) => {
@@ -29,4 +29,3 @@ const switchSortByRating = (e: Event) => {
     ><br />
   </section>
 </template>
-

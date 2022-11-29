@@ -1,4 +1,4 @@
-export const VideoListTransformer = (data: any) => {
+export const videoListTransformer = (data: any) => {
   return data.reduce((obj, dataItem) => {
     const id = dataItem._embedded.show.id;
     obj[id] = {

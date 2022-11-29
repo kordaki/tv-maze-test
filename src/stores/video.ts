@@ -1,4 +1,4 @@
-import { reactive, computed, toRaw } from "vue";
+import { reactive } from "vue";
 import { defineStore } from "pinia";
 import { getVideoRequest } from "@/services/api/VideoDataService";
 
@@ -17,7 +17,6 @@ export const useVideoStore = defineStore("video", () => {
     video.error = error;
     video.isLoading = false;
     video.data = response;
-    console.log('------ response: ' , video);
   };
 
   return {

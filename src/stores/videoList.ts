@@ -2,7 +2,7 @@ import { reactive, computed, toRaw } from "vue";
 import { defineStore } from "pinia";
 import { getVideoScheduleRequest } from "@/services/api/VideoDataService";
 
-export const useVideosStore = defineStore("videos", () => {
+export const useVideoListStore = defineStore("videoList", () => {
   const videos = reactive({
     isLoading: false,
     error: null,

@@ -1,42 +1,18 @@
 <script setup lang="ts">
 import VideoItem from "./VideoItem.vue";
-import { useVideosStore } from "@/stores/videos";
+import { useVideoListStore } from "@/stores/videoList";
 defineProps<{
   genre: string;
 }>();
 
-const videosStore = useVideosStore();
+const videoListStore = useVideoListStore();
 </script>
 
 <template>
   <h2 class="genre-title">{{ genre }}</h2>
   <section class="video-list">
     <VideoItem
-      v-for="video in videosStore.videoListByGenre(genre)"
-      v-bind:key="video.id"
-      :id="video.id"
-      :image="video.image?.medium"
-      :title="video.name"
-      :summary="video.summary"
-      :averageRating="video.rating.average"
-      :language="video.language"
-      :type="video.type"
-      :genres="video.genres"
-    />
-    <VideoItem
-      v-for="video in videosStore.videoListByGenre(genre)"
-      v-bind:key="video.id"
-      :id="video.id"
-      :image="video.image?.medium"
-      :title="video.name"
-      :summary="video.summary"
-      :averageRating="video.rating.average"
-      :language="video.language"
-      :type="video.type"
-      :genres="video.genres"
-    />
-    <VideoItem
-      v-for="video in videosStore.videoListByGenre(genre)"
+      v-for="video in videoListStore.videoListByGenre(genre)"
       v-bind:key="video.id"
       :id="video.id"
       :image="video.image?.medium"

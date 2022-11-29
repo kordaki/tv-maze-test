@@ -1,15 +1,19 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
+import isEmpty from "lodash/isEmpty";
 import IconLoading from "../components/icons/IconLoading.vue";
 import VideoList from "../components/videoList/VideoList.vue";
-import { useVideosStore } from "@/stores/videos";
-import SearchInput from "@/components/videoList/SearchInput.vue";
-import SortButton from "@/components/videoList/SortButton.vue";
+import { useVideoListStore } from "@/stores/videoList";
+import { useOptionsStore } from "@/stores/options";
+import SearchInput from "@/components/options/SearchInput.vue";
+import SortButton from "@/components/options/SortButton.vue";
+import SearchResult from "@/components/search/SearchResult.vue";
 
-const videosStore = useVideosStore();
+const videoListStore = useVideoListStore();
+const optionsStore = useOptionsStore();
 
 onMounted(async () => {
-  videosStore.getVideoList();
+  videoListStore.getVideoList();
 });
 </script>
 
@@ -20,13 +24,17 @@ onMounted(async () => {
       <SearchInput />
     </section>
 
-    <IconLoading v-if="videosStore.videos.isLoading" />
-    <section v-if="videosStore.genresList.length > 0">
-      <VideoList
-        v-for="genre in videosStore.genresList"
+    <SearchResult v-if="!isEmpty(optionsStore.searchText)" />
+    <section v-else>
+
+      <IconLoading v-if="videoListStore.videos.isLoading" />
+      <section v-if="videoListStore.genresList.length > 0">
+        <VideoList
+        v-for="genre in videoListStore.genresList"
         :genre="genre"
         v-bind:key="genre"
-      />
+        />
+      </section>
     </section>
   </main>
 </template>

@@ -20,7 +20,7 @@ apiClient.interceptors.response.use((response: any) => {
     // Transform success response in case of having a lighter cache
     const requestURL = response.request.responseURL;
 
-    const videoListRegex = new RegExp(`^${BASE_URL}/schedule/web*`);
+    const videoListRegex = new RegExp(`^${BASE_URL}/schedule/*`);
     if (videoListRegex.test(requestURL))
       return { ...response, data: videoListTransformer(response.data) };
 

@@ -9,22 +9,7 @@ const route = useRoute();
 defineProps<{
   genre: string;
 }>();
-
 const videoListStore = useVideoListStore();
-
-// watch(
-//   () => route.query.isSortEnable,
-//   async (newQuery: string) => {
-//     videoList.value = videoListStore.videoListByGenre(
-//       genre,
-//       Boolean(route.query.isSortEnable)
-//     );
-//     searchedListStore.searchVideoRequest(newQuery);
-//   },
-//   {
-//     immediate: true,
-//   }
-// );
 </script>
 
 <template>

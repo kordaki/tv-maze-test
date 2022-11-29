@@ -21,7 +21,7 @@
   display: inline-block;
   margin-right: 2rem;
 }
-.header .navigator a{
+.header .navigator a {
   font-size: 1rem;
   margin: 0 0.5rem;
 }

@@ -47,7 +47,6 @@ export const useVideosStore = defineStore("videos", () => {
     const res = videoListId.map((videoId: number) =>
       toRaw(videos.list[videoId])
     );
-    console.log("--- res:", res);
     return res;
   };
 

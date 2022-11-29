@@ -2,8 +2,9 @@
 import { onMounted } from "vue";
 import IconLoading from "../components/icons/IconLoading.vue";
 import VideoList from "../components/VideoList.vue";
-import VideoItem from "../components/VideoItem.vue";
 import { useVideosStore } from "@/stores/videos";
+import SearchInput from "@/components/SearchInput.vue";
+import SortButton from "@/components/SortButton.vue";
 
 const videosStore = useVideosStore();
 
@@ -14,6 +15,11 @@ onMounted(async () => {
 
 <template>
   <main>
+    <section class="filters">
+      <SortButton />
+      <SearchInput />
+    </section>
+
     <IconLoading v-if="videosStore.videos.isLoading" />
     <section v-if="videosStore.genresList.length > 0">
       <VideoList
@@ -24,3 +30,18 @@ onMounted(async () => {
     </section>
   </main>
 </template>
+
+<style>
+.filters {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 2rem 0;
+}
+
+@media (min-width: 1024px) {
+  .filters {
+    flex-direction: row;
+  }
+}
+</style>

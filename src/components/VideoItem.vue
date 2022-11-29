@@ -27,24 +27,30 @@ const navigateToVideoPage = () => {
   <article class="video" @click="navigateToVideoPage">
     <div class="hero">
       <img
-        :src="image || 'https://via.placeholder.com/210x295.png?text=image+not+found'"
+        :src="
+          image ||
+          'https://via.placeholder.com/210x295.png?text=image+not+found'
+        "
         alt="video"
         title="video"
       />
       <div class="description" v-html="summary"></div>
     </div>
-    <h3>{{ title }}</h3>
-    <span
-      >Rate: <b>{{ averageRating }}</b></span
-    >
-    <div>
-      Genre:
-      <span v-for="(genre, idx) in genres" :key="idx"
-        >{{ genre + (idx < genres.length - 1 ? ", " : "") }}
-      </span>
+    <h3 class="title">{{ title }}</h3>
+    <div class="attribute">
+      Rate: <b v-if="averageRating">{{ averageRating }}</b> <i v-else>Empty</i>
     </div>
-    <div>Language: {{ language }}</div>
-    <div>Type: {{ type }}</div>
+    <div class="attribute">
+      Genre:
+      <span v-if="genres.length > 0">
+        <span v-for="(genre, idx) in genres" :key="idx"
+          >{{ genre + (idx < genres.length - 1 ? ", " : "") }}
+        </span>
+      </span>
+      <i v-else> Unknown </i>
+    </div>
+    <div class="attribute">Language: {{ language }}</div>
+    <div class="attribute">Type: {{ type }}</div>
   </article>
 </template>
 
@@ -53,8 +59,10 @@ const navigateToVideoPage = () => {
   --video-height: 295px;
   --video-width: 210px;
 
+  cursor: pointer;
+  display: inline-block;
   width: var(--video-width);
-  padding: 0.5 rem;
+  margin: 0.75rem;
 }
 
 .video .hero {
@@ -67,7 +75,7 @@ const navigateToVideoPage = () => {
   height: var(--video-height);
   width: var(--video-width);
   object-fit: cover;
-  background-image: url('https://via.placeholder.com/210x295.png?text=Loading');
+  background-image: url("https://via.placeholder.com/210x295.png?text=Loading");
 }
 
 .video .hero .description {
@@ -94,5 +102,15 @@ const navigateToVideoPage = () => {
 .video:hover .hero .description {
   opacity: 1;
   top: 0;
+}
+
+.video .title {
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.video .attribute {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>

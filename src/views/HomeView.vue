@@ -29,7 +29,7 @@ onMounted(async () => {
     <SearchResult v-if="!isEmpty(route.query.q)" />
     <section v-else>
       <IconLoading v-if="videoListStore.videos.isLoading" />
-      <section v-if="videoListStore.genresList.length > 0">
+      <section v-else-if="videoListStore.genresList.length > 0">
         <VideoList
           v-for="genre in videoListStore.genresList"
           :genre="genre"

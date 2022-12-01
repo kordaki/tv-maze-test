@@ -2,48 +2,58 @@ import { reactive, computed, toRaw } from "vue";
 import { defineStore } from "pinia";
 import { getVideoScheduleRequest } from "@/services/api/VideoDataService";
 
+type storeVideos = {
+  isLoading: boolean;
+  error?: Error | null;
+  list?: any;
+};
+
 export const useVideoListStore = defineStore("videoList", () => {
-  const videos = reactive({
+  const videos: storeVideos = reactive({
     isLoading: false,
     error: null,
     list: {},
   });
 
   // actions
+  const updateVideos = ({ isLoading, error, list }: storeVideos) => {
+    videos.error = error;
+    videos.isLoading = isLoading;
+    if (list) videos.list = list;
+  };
+
   const getVideoList = async () => {
     if (videos.isLoading) return;
-    videos.isLoading = true;
-    videos.error = null;
+    updateVideos({ isLoading: true, error: null });
     const [error, response] = await getVideoScheduleRequest();
-    videos.error = error;
-    videos.isLoading = false;
-    videos.list = response;
+    updateVideos({ isLoading: false, error: error, list: response });
   };
 
   // getters
   const videoListGroupedByGenre = computed(() => {
     if (videos.error) return {};
-    const videoListGroupedByGenre = { unknown: [] };
+    const groupedByGenre = { unknown: [] };
     Object.values(videos.list).forEach((video: any) => {
       if (video.genres.length === 0) {
-        videoListGroupedByGenre["unknown"].push(video.id);
+        groupedByGenre["unknown"].push(video.id);
         return;
       }
       video.genres.forEach((genre: string) => {
-        if (videoListGroupedByGenre[genre]) {
-          videoListGroupedByGenre[genre].push(video.id);
+        if (groupedByGenre[genre]) {
+          groupedByGenre[genre].push(video.id);
         } else {
-          videoListGroupedByGenre[genre] = [video.id];
+          groupedByGenre[genre] = [video.id];
         }
       });
     });
-    return videoListGroupedByGenre;
+    return groupedByGenre;
   });
 
   const genresList = computed(() => Object.keys(videoListGroupedByGenre.value));
 
   // methods
   const sortVideoByRating = (videoList) => {
+    console.log('---- videoList', videoList)
     return videoList.sort((a, b) => {
       if (a.rating.average > b.rating.average) {
         return -1;
@@ -63,9 +73,11 @@ export const useVideoListStore = defineStore("videoList", () => {
 
   return {
     videos,
+    updateVideos,
     getVideoList,
     genresList,
     videoListGroupedByGenre,
+    sortVideoByRating,
     videoListByGenre,
   };
 });

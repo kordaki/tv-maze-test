@@ -13,7 +13,8 @@ export class MockBuilder {
   }
 
   randomItemInArray(data: Array<any>) {
-    return data[this.randomBetween(1, data.length)];
+    const randomNumber = this.randomBetween(0, data.length - 1);
+    return data[randomNumber];
   }
 
   randomId() {
@@ -30,11 +31,11 @@ export class MockBuilder {
 
   randomGenre() {
     const possibleCounts = this.randomBetween(0, 3);
-    const genresList: Array<string> = [];
+    const newGenreList: Array<string> = [];
     for (let i = 0; i < possibleCounts; i++) {
-      genreList.push(this.randomItemInArray(genreList));
+      newGenreList.push(this.randomItemInArray(genreList));
     }
-    return genresList;
+    return [...new Set(newGenreList)];
   }
 
   randomSummary() {

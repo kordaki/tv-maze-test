@@ -39,7 +39,7 @@ watch(
       <h2>
         Search result about <i>"{{ route.query.q }}"</i>
       </h2>
-      <button @click="cancelSearch">Cancel Search</button>
+      <button class="cancel-search" @click="cancelSearch">Cancel Search</button>
     </div>
     <section class="search-video-list">
       <IconLoading v-if="searchListStore.videos.isLoading" />
@@ -70,5 +70,10 @@ watch(
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.cancel-search {
+  background-color: var(--color-secondary);
+  color: var(--color-text);
 }
 </style>

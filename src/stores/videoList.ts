@@ -33,10 +33,10 @@ export const useVideoListStore = defineStore("videoList", () => {
   // getters
   const videoListGroupedByGenre = computed(() => {
     if (videos.error) return {};
-    const groupedByGenre = { unknown: [] };
+    const groupedByGenre = { Unknown: [] };
     Object.values(videos.list).forEach((video: Video) => {
       if (video.genres.length === 0) {
-        groupedByGenre["unknown"].push(video.id);
+        groupedByGenre["Unknown"].push(video.id);
         return;
       }
       video.genres.forEach((genre: string) => {

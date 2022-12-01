@@ -18,8 +18,9 @@ const switchSortByRating = (e: Event) => {
 </script>
 
 <template>
-  <section>
+  <section class="sort">
     <input
+      class="sort-check"
       type="checkbox"
       id="sort-by-rating"
       value="sort-by-rating"
@@ -30,3 +31,22 @@ const switchSortByRating = (e: Event) => {
     ><br />
   </section>
 </template>
+
+<style>
+.sort {
+  display: flex;
+  align-items: center;
+}
+.sort-check {
+  height: 2rem;
+  width: 2rem;
+}
+.sort-check:checked {
+  accent-color: var(--color-primary);
+}
+
+.sort label {
+  padding-left: 1rem;
+  cursor: pointer;
+}
+</style>

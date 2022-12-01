@@ -28,7 +28,9 @@ I used query params in URL to store values of search and sort in order to have:
 2. user can share the result of his search with others with sharing the URL with query params.
 
 ## Test
-In order to covering a wide range of test cases, I created a **MockBuilder** in `/mock` path (I really liked that :D ). Each time it generates new objects then tests will be more efficient specially in pipeline after each Push/PR. I tried to cover with unit tests for Pinia stores and logic plus ui component tests. I hope I could increase the test-coverage till the moment you're checking this project. 
+In order to covering a wide range of test cases, I created a **MockBuilder** in `/mock` path (I really liked that :D ). Each time it generates new objects then tests will be more efficient specially in pipeline after each Push/PR. I tried to cover with unit tests for Pinia stores and logic plus ui component tests. I hope I could increase the test-coverage till the moment you're checking this project.
+
+Test coverage **87%** for `/stores` including logics.
 
 ## For the future
 - Pipeline and ci for Tests, Test coverage, lint and build

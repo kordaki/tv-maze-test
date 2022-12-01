@@ -3,14 +3,14 @@ import { watch } from "vue";
 import isEmpty from "lodash/isEmpty";
 import { useRoute, useRouter } from "vue-router";
 // stores
-import { useSearchedListStore } from "@/stores/searchedList";
+import { useSearchListStore } from "@/stores/searchList";
 // components
 import VideoItem from "./VideoItem.vue";
 import IconLoading from "./icons/IconLoading.vue";
 import ErrorContent from "./common/ErrorContent.vue";
 import NotFound from "./common/NotFound.vue";
 
-const searchedListStore = useSearchedListStore();
+const searchListStore = useSearchListStore();
 const router = useRouter();
 const route = useRoute();
 
@@ -25,7 +25,7 @@ const cancelSearch = () => {
 watch(
   () => route.query.q,
   async (newQuery: string) => {
-    searchedListStore.searchVideoRequest(newQuery);
+    searchListStore.searchVideoRequest(newQuery);
   },
   {
     immediate: true,
@@ -42,13 +42,13 @@ watch(
       <button @click="cancelSearch">Cancel Search</button>
     </div>
     <section class="search-video-list">
-      <IconLoading v-if="searchedListStore.videos.isLoading" />
-      <ErrorContent v-else-if="searchedListStore.videos.error" />
-      <NotFound v-else-if="isEmpty(searchedListStore.videos.list)" />
+      <IconLoading v-if="searchListStore.videos.isLoading" />
+      <ErrorContent v-else-if="searchListStore.videos.error" />
+      <NotFound v-else-if="isEmpty(searchListStore.videos.list)" />
 
       <VideoItem
         v-else
-        v-for="video in searchedListStore.videos.list"
+        v-for="video in searchListStore.videos.list"
         v-bind:key="video.id"
         :id="video.id"
         :image="video.image?.medium"

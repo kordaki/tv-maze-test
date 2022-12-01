@@ -7,6 +7,8 @@ import {
   typeList,
   imageList,
 } from "./data";
+import type { Video } from "@/types/VideoType";
+
 export class MockBuilder {
   randomBetween(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -17,19 +19,19 @@ export class MockBuilder {
     return data[randomNumber];
   }
 
-  randomId() {
+  randomId(): Video["id"] {
     return this.randomItemInArray(idList);
   }
 
-  randomName() {
+  randomName(): Video["name"] {
     return this.randomItemInArray(nameList);
   }
 
-  randomLanguage() {
+  randomLanguage(): Video["language"] {
     return this.randomItemInArray(languageList);
   }
 
-  randomGenre() {
+  randomGenre(): Video["genres"] {
     const possibleCounts = this.randomBetween(0, 3);
     const newGenreList: Array<string> = [];
     for (let i = 0; i < possibleCounts; i++) {
@@ -38,19 +40,19 @@ export class MockBuilder {
     return [...new Set(newGenreList)];
   }
 
-  randomSummary() {
+  randomSummary(): Video["summary"] {
     return this.randomItemInArray(summaryList);
   }
 
-  randomType() {
+  randomType(): Video["type"] {
     return this.randomItemInArray(typeList);
   }
 
-  randomImage() {
+  randomImage(): Video["image"] {
     return this.randomItemInArray(imageList);
   }
 
-  randomRating() {
-    return this.randomBetween(1, 100) / 10;
+  randomRating(): Video["rating"] {
+    return { average: this.randomBetween(1, 100) / 10 };
   }
 }

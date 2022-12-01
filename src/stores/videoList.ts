@@ -1,11 +1,12 @@
 import { reactive, computed, toRaw } from "vue";
 import { defineStore } from "pinia";
 import { getVideoScheduleRequest } from "@/services/api/VideoDataService";
+import type { Video } from "@/types/VideoType";
 
 type storeVideos = {
   isLoading: boolean;
   error?: Error | null;
-  list?: any;
+  list?: Record<Video["id"], Video>;
 };
 
 export const useVideoListStore = defineStore("videoList", () => {
@@ -33,7 +34,7 @@ export const useVideoListStore = defineStore("videoList", () => {
   const videoListGroupedByGenre = computed(() => {
     if (videos.error) return {};
     const groupedByGenre = { unknown: [] };
-    Object.values(videos.list).forEach((video: any) => {
+    Object.values(videos.list).forEach((video: Video) => {
       if (video.genres.length === 0) {
         groupedByGenre["unknown"].push(video.id);
         return;
@@ -52,9 +53,8 @@ export const useVideoListStore = defineStore("videoList", () => {
   const genresList = computed(() => Object.keys(videoListGroupedByGenre.value));
 
   // methods
-  const sortVideoByRating = (videoList) => {
-    console.log('---- videoList', videoList)
-    return videoList.sort((a, b) => {
+  const sortVideoByRating = (videoList: Array<Video>) => {
+    return videoList.sort((a: Video, b: Video) => {
       if (a.rating.average > b.rating.average) {
         return -1;
       }
@@ -64,6 +64,7 @@ export const useVideoListStore = defineStore("videoList", () => {
       return 0;
     });
   };
+
   const videoListByGenre = (genreName: string, isSortEnable: boolean) => {
     const videoListId = videoListGroupedByGenre.value[genreName];
     let res = videoListId.map((videoId: number) => toRaw(videos.list[videoId]));

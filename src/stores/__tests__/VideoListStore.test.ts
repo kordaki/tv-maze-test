@@ -2,6 +2,7 @@ import { createPinia, setActivePinia } from "pinia";
 import { beforeEach, describe, expect, test } from "vitest";
 import { useVideoListStore } from "@/stores/videoList";
 import { VideoMockBuilder } from "@/mock/VideoMockBuilder";
+import type { Video } from "@/types/VideoType";
 
 const videoMockBuilder = new VideoMockBuilder();
 
@@ -92,11 +93,11 @@ describe("VideoList Store", () => {
       randomVideoGenre,
       false
     );
-    videoListByGenre.forEach((video: any) =>
+    videoListByGenre.forEach((video: Video) =>
       expect(video.genres).toContain(randomVideoGenre)
     );
 
-    const videoListIdByGenre = videoListByGenre.map((video: any) => video.id);
+    const videoListIdByGenre = videoListByGenre.map((video: Video) => video.id);
     expect(videoListIdByGenre).toContain(Number(randomVideoId));
   });
 });

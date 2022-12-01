@@ -1,21 +1,27 @@
 export type VideoImage = {
-  medium: String;
-  original: String;
+  medium: string;
+  original: string;
+};
+
+export type Rating = {
+  average: number;
 };
 
 export interface Video {
-  id: Number;
-  language: String;
-  name: String;
-  averageRuntime: Number;
-  ended: String;
-  url: String;
-  weight: Number;
+  id: number;
+  language: string;
+  name: string;
+  rating: Rating;
+  ended: string;
+  url: string;
+  weight: number;
   image: VideoImage;
-  genres: Array<String>;
-  summary: String;
-  type: String;
+  genres: Array<string>;
+  summary: string;
+  type: string;
 }
+
+export type KeyVideo = Record<Video["id"], Video>;
 
 export interface VideoResponse {
   data: Video;

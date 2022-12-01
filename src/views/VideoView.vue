@@ -24,40 +24,40 @@ onMounted(() => {
   <section class="video-page" v-else>
     <div class="image">
       <img
-        v-if="!isEmpty(videoStore.video.data.image)"
-        :src="videoStore.video.data.image.original"
+        v-if="!isEmpty(videoStore.video.data?.image)"
+        :src="videoStore.video.data?.image.original"
       />
     </div>
     <div class="content">
-      <h1 class="title">{{ videoStore.video.data.name }}</h1>
+      <h1 class="title">{{ videoStore.video.data?.name }}</h1>
       <ul class="attribute">
         <li>
           Rate:
-          <b v-if="videoStore.video.data.rating.average">{{
-            videoStore.video.data.rating.average
+          <b v-if="videoStore.video.data?.rating.average">{{
+            videoStore.video.data?.rating.average
           }}</b>
           <i v-else>Empty</i>
         </li>
         <li>
           Genre:
-          <span v-if="videoStore.video.data.genres.length > 0">
+          <span v-if="videoStore.video.data?.genres.length > 0">
             <span
-              v-for="(genre, idx) in videoStore.video.data.genres"
+              v-for="(genre, idx) in videoStore.video.data?.genres"
               :key="idx"
               >{{
                 genre +
-                (idx < videoStore.video.data.genres.length - 1 ? ", " : "")
+                (idx < videoStore.video.data?.genres.length - 1 ? ", " : "")
               }}
             </span>
           </span>
           <i v-else> Unknown </i>
         </li>
-        <li>Language: {{ videoStore.video.data.language }}</li>
-        <li>Type: {{ videoStore.video.data.type }}</li>
+        <li>Language: {{ videoStore.video.data?.language }}</li>
+        <li>Type: {{ videoStore.video.data?.type }}</li>
       </ul>
       <div
         class="attribute summary"
-        v-html="videoStore.video.data.summary"
+        v-html="videoStore.video.data?.summary"
       ></div>
     </div>
   </section>

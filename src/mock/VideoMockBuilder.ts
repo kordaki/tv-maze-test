@@ -1,4 +1,5 @@
 import { MockBuilder } from "./MockBuilder";
+import type { Video } from "@/types/VideoType";
 
 export class VideoMockBuilder extends MockBuilder {
   create() {
@@ -23,11 +24,11 @@ export class VideoMockBuilder extends MockBuilder {
   }
 
   createKeyListOf(number: number) {
-    const videoList: any = {};
+    const videoKeyList: Record<Video["id"], Video> = {};
     for (let i = 0; i < number; i++) {
       const video = this.create();
-      videoList[video.id] = video;
+      videoKeyList[video.id] = video;
     }
-    return videoList;
+    return videoKeyList;
   }
 }

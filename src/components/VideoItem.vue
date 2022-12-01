@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
-
+import type { Rating, VideoImage } from "@/types/VideoType";
 const router = useRouter();
 const props = defineProps<{
   id: number;
-  image?: string;
-  title: string;
+  image?: VideoImage;
+  name: string;
   summary?: string;
-  averageRating?: number;
+  rating: Rating;
   genres: Array<string>;
   language?: string;
   type: string;
@@ -28,7 +28,7 @@ const navigateToVideoPage = () => {
     <div class="hero">
       <img
         :src="
-          image ||
+          image?.medium ||
           'https://via.placeholder.com/210x295.png?text=image+not+found'
         "
         alt="video"
@@ -36,9 +36,9 @@ const navigateToVideoPage = () => {
       />
       <div class="description" v-html="summary"></div>
     </div>
-    <h3 class="title">{{ title }}</h3>
+    <h3 class="name">{{ name }}</h3>
     <div class="attribute">
-      Rate: <b v-if="averageRating">{{ averageRating }}</b> <i v-else>Empty</i>
+      Rate: <b v-if="rating.average">{{ rating.average }}</b> <i v-else>Empty</i>
     </div>
     <div class="attribute">
       Genre:
@@ -104,7 +104,7 @@ const navigateToVideoPage = () => {
   top: 0;
 }
 
-.video .title {
+.video .name {
   font-weight: bold;
   overflow: hidden;
   text-overflow: ellipsis;

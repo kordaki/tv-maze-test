@@ -1,15 +1,16 @@
 import { reactive } from "vue";
 import { defineStore } from "pinia";
 import { getVideoRequest } from "@/services/api/VideoDataService";
+import type { Video } from "@/types/VideoType";
 
 type storeVideo = {
   isLoading: boolean;
   error?: Error | null;
-  data?: any;
+  data?: Video;
 };
 
 export const useVideoStore = defineStore("video", () => {
-  const video = reactive({
+  const video: storeVideo = reactive({
     isLoading: false,
     error: null,
     data: {},

@@ -1,18 +1,19 @@
 import { reactive } from "vue";
 import { defineStore } from "pinia";
 import { searchVideosRequest } from "@/services/api/VideoDataService";
+import type { Video } from "@/types/VideoType";
 
 type storeVideos = {
   isLoading: boolean;
   error?: Error | null;
-  list?: any;
+  list?: Array<Video>;
 };
 
 export const useSearchListStore = defineStore("searchList", () => {
-  const videos = reactive({
+  const videos: storeVideos = reactive({
     isLoading: false,
     error: null,
-    list: {},
+    list: [],
   });
 
   // actions

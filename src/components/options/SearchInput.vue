@@ -36,13 +36,15 @@ const searchHandler = (e: Event) => {
   height: 2.5rem;
   padding: 0 0.5rem;
   width: 10rem;
-  transition: all 0.1s linear;
+  transition: all 0.15s ease-out;
   background-color: var(--color-background-soft);
   border: none;
   color: var(--color-text);
+  border-bottom: 1px solid var(--color-border);
 }
 .search-input:focus {
   width: 15rem;
   background: var(--color-background-mute);
+  border-color: var(--color-primary);
 }
 </style>

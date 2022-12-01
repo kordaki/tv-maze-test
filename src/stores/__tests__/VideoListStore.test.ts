@@ -66,8 +66,9 @@ describe("VideoList Store", () => {
     const mockVideosCount = 10;
     const mockVideos = videoMockBuilder.createListOf(mockVideosCount);
     const sortedVideoList = videoListStore.sortVideoByRating(mockVideos);
+
     for (let i = 0; i < mockVideos.length - 1; i++) {
-      expect(sortedVideoList[i].rating.average).toStrictEqual(
+      expect(sortedVideoList[i].rating.average).toBeGreaterThanOrEqual(
         sortedVideoList[i + 1].rating.average
       );
     }

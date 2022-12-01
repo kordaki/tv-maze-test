@@ -11,7 +11,7 @@ describe("SearchList Store", () => {
     const videoListStore = useSearchListStore();
     expect(videoListStore.videos.isLoading).toStrictEqual(false);
     expect(videoListStore.videos.error).toStrictEqual(null);
-    expect(videoListStore.videos.list).toStrictEqual({});
+    expect(videoListStore.videos.list).toStrictEqual([]);
   });
 
   test("Videos should start loading", () => {

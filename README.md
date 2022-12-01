@@ -14,23 +14,23 @@ I used **Axios** and put the configuration file into `/config` path. API calls a
 
 > `responseTransformations` can be models and effect on the response of get method on axios, But I put them in `interceptors` because of **Lighter cached data** in memory.
 
-I wanted to cache API response with [TanStack](https://tanstack.com/query/v4/docs/adapters/vue-query) (Vue-Query). In that case I had to keep the whole response in cache and transform it to an smaller object each time. But with transforming response in the interceptor level, the response will be sanitized before caching. In the case of using 
+I wanted to cache API response with [TanStack](https://tanstack.com/query/v4/docs/adapters/vue-query) (Vue-Query). In that case I had to keep the whole response in cache and transform it to an smaller object each time. But with transforming response in the interceptor level, the response will be sanitized before caching.
 
 ## Logic
 I put logic into Pinia because I found it very performant with memoization on `computed` method. and the value can be shared with other parts. In addition, logic and components are separated.
 
 ## Video list
-For showing videos in their genres,  I need a list of genres then load the relevant videos under that genre. I used **hashmap** for this to reduce the complexity to `O(n)` with one loop.
+For showing video list based on their genres,  I needed a list of genres first. Then I could load the relevant videos under that genre. From the performance perspective, I used **hashmap** for extracting the genres and keeping the relation of them with videos in order to reduce the complexity to `O(n)` with one loop.
 
 ## Sort and search
-I used query params in URL to store values of search and sort in order to have: 
+I used **query params** in URL to store search query and sort because of: 
 1. keeping the history and having the ability of checking the previous results with the back button of browser,
 2. user can share the result of his search with others with sharing the URL with query params.
 
 ## Test
 In order to covering a wide range of test cases, I created a **MockBuilder** in `/mock` path (I really liked that :D ). Each time it generates new objects then tests will be more efficient specially in pipeline after each Push/PR. I tried to cover with unit tests for Pinia stores and logic plus ui component tests. I hope I could increase the test-coverage till the moment you're checking this project.
 
-Test coverage **87%** for `/stores` including logics.
+Test coverage **87%** for `/stores` including logics. But UI test is not covering a high percentage. I just added one simple UI test for **videoItem**. Unfortunately need I need more time to do it.
 
 ## For the future
 - Pipeline and ci for Tests, Test coverage, lint and build

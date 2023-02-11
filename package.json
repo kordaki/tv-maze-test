@@ -1,6 +1,7 @@
 {
   "name": "tv-maze-test",
   "version": "0.0.0",
+  "homepage": "https://kordaki.github.io/tv-maze-test/",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
